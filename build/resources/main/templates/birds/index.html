@@ -1,0 +1,18 @@
+<DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Bird Log</title>
+    </head>
+    <body>
+
+    <h1>All Birds</h1>
+
+    <ul>
+        <th:block th:each="bird : ${birds}">
+            <li th:text="${bird}"></li>
+        </th:block>
+    </ul>
+
+    </body>
+    </html>
