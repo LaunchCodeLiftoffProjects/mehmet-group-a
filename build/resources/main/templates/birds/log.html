@@ -1,0 +1,28 @@
+<DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Bird Log</title>
+    </head>
+    <body>
+
+    <h1>Log a Bird</h1>
+
+    <form method="post" action="/birds/log">
+        <label>Species
+            <input type="text" name="birdSpecies">
+        </label>
+<!--        <label>Behavior-->
+<!--            <input type="text" name="birdBehavior">-->
+<!--        </label>-->
+<!--        <label>Time-->
+<!--            <input type="text" name="timeSeen">-->
+<!--        </label>-->
+<!--        <label>Date-->
+<!--            <input type="text" name="dateSeen">-->
+<!--        </label>-->
+        <input type="submit" value="Log Bird">
+    </form>
+
+    </body>
+    </html>
