@@ -9,9 +9,9 @@
     <h1>All Birds</h1>
 
     <table>
-        <tr th:block th:each="bird : ${birds}">
-            <td th:text="${species}"></td>
-            <td th:text="${behavior}"></td>
+        <tr th:each="bird : ${birds}">
+            <td th:text="${bird.species}"></td>
+            <td th:text="${bird.behavior}"></td>
         </tr>
     </table>
 

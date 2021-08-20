@@ -1,5 +1,6 @@
 package org.launchcode.birdistheword.controllers;
 
+import org.launchcode.birdistheword.models.Bird;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import java.util.*;
 @RequestMapping("birds")
 public class BirdController {
 
-    private static Map<String, String> birds = new HashMap<>();
+    private static List<Bird> birds = new ArrayList<>();
 
     @GetMapping
     public String displayAllBirds(Model model) {
@@ -27,8 +28,9 @@ public class BirdController {
     }
 
     @PostMapping("log")
-    public String processAddBirdForm(@RequestParam String species, @RequestParam String behavior) {
-        birds.put(species, behavior);
+    public String processAddBirdForm(@RequestParam String species,
+                                     @RequestParam String behavior) {
+        birds.add(new Bird(species, behavior));
         return "redirect:";
     }
 
