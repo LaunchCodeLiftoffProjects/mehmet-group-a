@@ -8,11 +8,12 @@
 
     <h1>All Birds</h1>
 
-    <ul>
-        <th:block th:each="bird : ${birds}">
-            <li th:text="${bird}"></li>
-        </th:block>
-    </ul>
+    <table>
+        <tr th:block th:each="bird : ${birds}">
+            <td th:text="${species}"></td>
+            <td th:text="${behavior}"></td>
+        </tr>
+    </table>
 
     </body>
     </html>

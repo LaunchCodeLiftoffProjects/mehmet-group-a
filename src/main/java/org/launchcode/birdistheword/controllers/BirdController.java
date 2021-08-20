@@ -7,15 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("birds")
 public class BirdController {
 
-    private static List<String> birds = new ArrayList<>();
+    private static Map<String, String> birds = new HashMap<>();
 
     @GetMapping
     public String displayAllBirds(Model model) {
@@ -29,8 +27,8 @@ public class BirdController {
     }
 
     @PostMapping("log")
-    public String processAddBirdForm(@RequestParam String birdSpecies) {
-        birds.add(birdSpecies);
+    public String processAddBirdForm(@RequestParam String species, @RequestParam String behavior) {
+        birds.put(species, behavior);
         return "redirect:";
     }
 
