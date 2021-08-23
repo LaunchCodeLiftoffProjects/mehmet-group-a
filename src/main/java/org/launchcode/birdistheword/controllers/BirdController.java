@@ -29,8 +29,9 @@ public class BirdController {
 
     @PostMapping("log")
     public String processAddBirdForm(@RequestParam String species,
-                                     @RequestParam String behavior) {
-        birds.add(new Bird(species, behavior));
+                                     @RequestParam String behavior,
+                                     @RequestParam String dateSeen) {
+        birds.add(new Bird(species, behavior, dateSeen));
         return "redirect:";
     }
 
