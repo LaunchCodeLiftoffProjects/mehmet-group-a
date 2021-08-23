@@ -9,9 +9,17 @@
     <h1>All Birds</h1>
 
     <table>
+        <thead>
+            <tr>
+                <th>Species</th>
+                <th>Behavior</th>
+                <th>Date Seen</th>
+            </tr>
+        </thead>
         <tr th:each="bird : ${birds}">
             <td th:text="${bird.species}"></td>
             <td th:text="${bird.behavior}"></td>
+            <td th:text="${bird.dateSeen}"></td>
         </tr>
     </table>
 

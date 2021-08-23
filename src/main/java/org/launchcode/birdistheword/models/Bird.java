@@ -8,14 +8,13 @@ public class Bird {
 //    private int id;
     private String species;
     private String behavior;
-//    private Date dateSeen;
+    private String dateSeen;
 
-    public Bird(String species, String behavior) {
+    public Bird(String species, String behavior, String dateSeen) {
 //        this.id = id;
         this.species = species;
         this.behavior = behavior;
-//        this.dateSeen = dateSeen;
-//        this.timeSeen = timeSeen;
+        this.dateSeen = dateSeen;
     }
 
 //    public int getId() {
@@ -37,14 +36,14 @@ public class Bird {
     public void setBehavior(String behavior) {
         this.behavior = behavior;
     }
-//
-//    public Date getDateSeen() {
-//        return dateSeen;
-//    }
-//
-//    public void setDateSeen(Date dateSeen) {
-//        this.dateSeen = dateSeen;
-//    }
+
+    public String getDateSeen() {
+        return dateSeen;
+    }
+
+    public void setDateSeen(String dateSeen) {
+        this.dateSeen = dateSeen;
+    }
 //
 //    public String getTimeSeen() {
 //        return timeSeen;
