@@ -1,6 +1,9 @@
 package org.launchcode.birdistheword.controllers;
 
 import org.launchcode.birdistheword.models.Bird;
+import org.launchcode.birdistheword.repository.BirdRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +17,12 @@ import java.util.*;
 @RequestMapping("birds")
 public class BirdController {
 
-    private static List<Bird> birds = new ArrayList<>();
+    @Autowired
+    private BirdRepo birdRepo;
 
     @GetMapping
     public String displayAllBirds(Model model) {
-        model.addAttribute("birds", birds);
+        model.addAttribute("birds", birdRepo.findAll());
         return "birds/index";
     }
 
@@ -30,8 +34,8 @@ public class BirdController {
     @PostMapping("log")
     public String processAddBirdForm(@RequestParam String species,
                                      @RequestParam String behavior,
-                                     @RequestParam String dateSeen) {
-        birds.add(new Bird(species, behavior, dateSeen));
+                                     @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateSeen) {
+        birdRepo.save(new Bird(species, behavior, dateSeen));
         return "redirect:";
     }
 

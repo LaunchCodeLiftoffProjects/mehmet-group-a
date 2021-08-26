@@ -1,25 +1,47 @@
 package org.launchcode.birdistheword.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
 public class Bird {
 
-//    private int id;
-    private String species;
-    private String behavior;
-    private String dateSeen;
+    @Id
+    @GeneratedValue
+    private int id;
 
-    public Bird(String species, String behavior, String dateSeen) {
-//        this.id = id;
+    @NotNull(message = "Species required.")
+    @Size(max = 255, message = "255 characters or fewer needed")
+    private String species;
+
+    @NotNull(message = "Behavior required.")
+    @Size(max = 255, message = "255 characters or fewer needed")
+    private String behavior;
+
+    @NotNull(message = "Date required.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateSeen;
+
+    public Bird(){
+
+    }
+
+    public Bird(String species, String behavior, Date dateSeen) {
         this.species = species;
         this.behavior = behavior;
         this.dateSeen = dateSeen;
     }
 
-//    public int getId() {
-//        return id;
-//    }
+    public int getId() {
+        return id;
+    }
 
     public String getSpecies() {
         return species;
@@ -37,11 +59,11 @@ public class Bird {
         this.behavior = behavior;
     }
 
-    public String getDateSeen() {
+    public Date getDateSeen() {
         return dateSeen;
     }
 
-    public void setDateSeen(String dateSeen) {
+    public void setDateSeen(Date dateSeen) {
         this.dateSeen = dateSeen;
     }
 //

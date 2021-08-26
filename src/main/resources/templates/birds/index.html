@@ -36,7 +36,7 @@
         <tr th:each="bird : ${birds}">
             <td th:text="${bird.species}"></td>
             <td th:text="${bird.behavior}"></td>
-            <td th:text="${bird.dateSeen}"></td>
+            <td th:text="${#dates.format(bird.dateSeen, 'MM-dd-yyyy')}"></td>
         </tr>
     </table>
     </div>
