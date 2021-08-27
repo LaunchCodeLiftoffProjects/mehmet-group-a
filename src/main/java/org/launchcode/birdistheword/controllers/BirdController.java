@@ -1,5 +1,6 @@
 package org.launchcode.birdistheword.controllers;
 
+import org.launchcode.birdistheword.data.BirdData;
 import org.launchcode.birdistheword.models.Bird;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +15,16 @@ import java.util.*;
 @RequestMapping("birds")
 public class BirdController {
 
-    private static List<Bird> birds = new ArrayList<>();
-
     @GetMapping
     public String displayAllBirds(Model model) {
-        model.addAttribute("birds", birds);
+        model.addAttribute("title", "All Birds");
+        model.addAttribute("birds", BirdData.getAll());
         return "birds/index";
     }
 
     @GetMapping("log")
-    public String renderAddBirdForm() {
+    public String displayAddBirdForm(Model model) {
+        model.addAttribute("title", "Log a Bird");
         return "birds/log";
     }
 
@@ -31,7 +32,24 @@ public class BirdController {
     public String processAddBirdForm(@RequestParam String species,
                                      @RequestParam String behavior,
                                      @RequestParam String dateSeen) {
-        birds.add(new Bird(species, behavior, dateSeen));
+        BirdData.add(new Bird(species, behavior, dateSeen));
+        return "redirect:";
+    }
+
+    @GetMapping("delete")
+    public String displayDeleteBirdForm(Model model) {
+        model.addAttribute("title", "Delete Bird");
+        model.addAttribute("birds", BirdData.getAll());
+        return "birds/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteEventForm(@RequestParam(required = false) int[] birdIds) {
+        if (birdIds != null) {
+            for (int id : birdIds) {
+                BirdData.remove(id);
+            }
+        }
         return "redirect:";
     }
 
