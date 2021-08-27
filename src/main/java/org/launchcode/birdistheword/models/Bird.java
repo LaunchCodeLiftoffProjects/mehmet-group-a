@@ -5,21 +5,24 @@ import java.util.Objects;
 
 public class Bird {
 
-//    private int id;
+    private int id;
+    private static int nextId = 1;
+
     private String species;
     private String behavior;
     private String dateSeen;
 
     public Bird(String species, String behavior, String dateSeen) {
-//        this.id = id;
         this.species = species;
         this.behavior = behavior;
         this.dateSeen = dateSeen;
+        this.id = nextId;
+        nextId++;
     }
 
-//    public int getId() {
-//        return id;
-//    }
+    public int getId() {
+        return id;
+    }
 
     public String getSpecies() {
         return species;
@@ -44,27 +47,20 @@ public class Bird {
     public void setDateSeen(String dateSeen) {
         this.dateSeen = dateSeen;
     }
-//
-//    public String getTimeSeen() {
-//        return timeSeen;
-//    }
-//
-//    public void setTimeSeen(String timeSeen) {
-//        this.timeSeen = timeSeen;
-//    }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Bird bird = (Bird) o;
-//        return id == bird.id;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bird bird = (Bird) o;
+        return id == bird.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Override
     public String toString() {
