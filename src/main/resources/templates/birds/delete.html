@@ -1,0 +1,25 @@
+<DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <meta charset="UTF-8"/>
+        <title></title>
+    </head>
+    <body class="container">
+
+    <form method="post">
+
+        <th:block th:each="bird : ${birds}">
+            <div class="form-group">
+            <label>
+                <span th:text="${bird.species}"></span>
+                <input type="checkbox" name="birdIds" th:value="${bird.id}" class="form-control">
+            </label>
+            </div>
+        </th:block>
+
+        <input type="submit" value="Delete">
+
+    </form>
+
+    </body>
+    </html>
