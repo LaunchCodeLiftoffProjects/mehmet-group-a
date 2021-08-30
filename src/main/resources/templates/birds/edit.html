@@ -39,7 +39,12 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Behavior</span>
                 </div>
-                <input type="text" th:name="behavior" th:value="${bird.behavior}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <select th:name="behavior" th:value="${bird.behavior}" th:field="${bird.behavior}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <option th:each="behavior : ${behaviors}"
+                            th:value="${behavior}"
+                            th:text="${behavior.displayName}"
+                    ></option>
+                </select>
             </div>
 
             <div class="input-group mb-3">

@@ -14,13 +14,11 @@ public class Bird {
     @Size(min = 3, max = 100, message = "Species name must be between 3 and 100 characters")
     private String species;
 
-    @NotBlank(message = "Behavior is required")
-    @Size(max = 200, message = "Behavior description is too long")
-    private String behavior;
+    private Behavior behavior;
 
     private String dateSeen;
 
-    public Bird(String species, String behavior, String dateSeen) {
+    public Bird(String species, Behavior behavior, String dateSeen) {
         this();
         this.species = species;
         this.behavior = behavior;
@@ -44,11 +42,11 @@ public class Bird {
         this.species = species;
     }
 
-    public String getBehavior() {
+    public Behavior getBehavior() {
         return behavior;
     }
 
-    public void setBehavior(String behavior) {
+    public void setBehavior(Behavior behavior) {
         this.behavior = behavior;
     }
 
