@@ -32,21 +32,21 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Species</span>
                 </div>
-                <input type="text" th:value="${bird.species}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input type="text" th:name="species" th:value="${bird.species}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Behavior</span>
                 </div>
-                <input type="text" th:value="${bird.behavior}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input type="text" th:name="behavior" th:value="${bird.behavior}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Date Seen</span>
                 </div>
-                <input type="text" th:value="${bird.dateSeen}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input type="text" th:name="dateSeen" th:value="${bird.dateSeen}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
 
             <button type="submit" class="btn btn-primary">Edit Bird</button>
