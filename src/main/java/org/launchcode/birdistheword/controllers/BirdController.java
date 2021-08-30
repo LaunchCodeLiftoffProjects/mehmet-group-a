@@ -4,10 +4,7 @@ import org.launchcode.birdistheword.data.BirdData;
 import org.launchcode.birdistheword.models.Bird;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -29,10 +26,8 @@ public class BirdController {
     }
 
     @PostMapping("log")
-    public String processAddBirdForm(@RequestParam String species,
-                                     @RequestParam String behavior,
-                                     @RequestParam String dateSeen) {
-        BirdData.add(new Bird(species, behavior, dateSeen));
+    public String processAddBirdForm(@ModelAttribute Bird newBird) {
+        BirdData.add(newBird);
         return "redirect:";
     }
 
