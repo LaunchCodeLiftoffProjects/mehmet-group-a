@@ -48,4 +48,22 @@ public class BirdController {
         return "redirect:";
     }
 
+    @GetMapping("edit/{birdId}")
+    public String displayEditBirdForm(Model model, @PathVariable int birdId) {
+        Bird birdToEdit = BirdData.getById(birdId);
+        model.addAttribute("bird", birdToEdit);
+        String title = "Edit Bird " + birdToEdit.getSpecies() + " (id=" + birdToEdit.getId() +")";
+        model.addAttribute("title", title);
+        return "birds/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int birdId, String species, String behavior, String dateSeen) {
+        Bird birdToEdit = BirdData.getById(birdId);
+        birdToEdit.setSpecies(species);
+        birdToEdit.setBehavior(behavior);
+        birdToEdit.setDateSeen(dateSeen);
+        return "redirect:";
+    }
+
 }
