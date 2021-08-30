@@ -24,6 +24,8 @@
         </div>
     </nav>
 
+<!--    <p th:text="${errorMsg}" style="color:red;"></p>-->
+
     <div class="container">
 
     <form method="post" action="/birds/log">
@@ -31,21 +33,24 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default">Species</span>
             </div>
-            <input type="text" name="species" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <input type="text" th:field="${bird.species}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <p style="color:red;" th:errors="${bird.species}"></p>
         </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default">Behavior</span>
             </div>
-            <input type="text" name="behavior" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <input type="text" th:field="${bird.behavior}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <p style="color:red;" th:errors="${bird.behavior}"></p>
         </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default">Date Seen</span>
             </div>
-            <input type="text" name="dateSeen" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <input type="text" th:field="${bird.dateSeen}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+<!--            <p style="color:red;" th:errors="${bird.dateSeen}"></p>-->
         </div>
 
         <button type="submit" class="btn btn-primary">Log Bird</button>

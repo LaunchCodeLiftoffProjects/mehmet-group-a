@@ -4,8 +4,10 @@ import org.launchcode.birdistheword.data.BirdData;
 import org.launchcode.birdistheword.models.Bird;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -22,11 +24,19 @@ public class BirdController {
     @GetMapping("log")
     public String displayAddBirdForm(Model model) {
         model.addAttribute("title", "Log a Bird");
+        model.addAttribute("bird", new Bird());
         return "birds/log";
     }
 
     @PostMapping("log")
-    public String processAddBirdForm(@ModelAttribute Bird newBird) {
+    public String processAddBirdForm(@ModelAttribute @Valid Bird newBird,
+                                     Errors errors, Model model) {
+        if(errors.hasErrors()) {
+            model.addAttribute("title", "Log Bird");
+            model.addAttribute("errorMsg", "Bad data!");
+            return "birds/log";
+        }
+
         BirdData.add(newBird);
         return "redirect:";
     }

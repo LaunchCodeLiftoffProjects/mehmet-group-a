@@ -1,5 +1,7 @@
 package org.launchcode.birdistheword.models;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,14 +10,24 @@ public class Bird {
     private int id;
     private static int nextId = 1;
 
+    @NotBlank(message = "Species is required")
+    @Size(min = 3, max = 100, message = "Species name must be between 3 and 100 characters")
     private String species;
+
+    @NotBlank(message = "Behavior is required")
+    @Size(max = 200, message = "Behavior description is too long")
     private String behavior;
+
     private String dateSeen;
 
     public Bird(String species, String behavior, String dateSeen) {
+        this();
         this.species = species;
         this.behavior = behavior;
         this.dateSeen = dateSeen;
+    }
+
+    public Bird() {
         this.id = nextId;
         nextId++;
     }
