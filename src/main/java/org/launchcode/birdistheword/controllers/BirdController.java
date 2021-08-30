@@ -1,6 +1,7 @@
 package org.launchcode.birdistheword.controllers;
 
 import org.launchcode.birdistheword.data.BirdData;
+import org.launchcode.birdistheword.models.Behavior;
 import org.launchcode.birdistheword.models.Bird;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class BirdController {
     public String displayAddBirdForm(Model model) {
         model.addAttribute("title", "Log a Bird");
         model.addAttribute("bird", new Bird());
+        model.addAttribute("behaviors", Behavior.values());
         return "birds/log";
     }
 
@@ -68,7 +70,7 @@ public class BirdController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(int birdId, String species, String behavior, String dateSeen) {
+    public String processEditForm(int birdId, String species, Behavior behavior, String dateSeen) {
         Bird birdToEdit = BirdData.getById(birdId);
         birdToEdit.setSpecies(species);
         birdToEdit.setBehavior(behavior);

@@ -37,7 +37,7 @@
         <tr th:each="bird : ${birds}">
             <td th:text="${bird.id}"></td>
             <td th:text="${bird.species}"></td>
-            <td th:text="${bird.behavior}"></td>
+            <td th:text="${bird.behavior.displayName}"></td>
             <td th:text="${bird.dateSeen}"></td>
             <td>
                 <a th:href="@{/birds/edit/{id}(id=${bird.id})}">Edit</a>

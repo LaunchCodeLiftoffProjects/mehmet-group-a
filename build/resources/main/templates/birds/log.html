@@ -24,8 +24,6 @@
         </div>
     </nav>
 
-<!--    <p th:text="${errorMsg}" style="color:red;"></p>-->
-
     <div class="container">
 
     <form method="post" action="/birds/log">
@@ -41,8 +39,12 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default">Behavior</span>
             </div>
-            <input type="text" th:field="${bird.behavior}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-            <p style="color:red;" th:errors="${bird.behavior}"></p>
+            <select th:field="${bird.behavior}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <option th:each="behavior : ${behaviors}"
+                        th:value="${behavior}"
+                        th:text="${behavior.displayName}"
+                ></option>
+            </select>
         </div>
 
         <div class="input-group mb-3">
