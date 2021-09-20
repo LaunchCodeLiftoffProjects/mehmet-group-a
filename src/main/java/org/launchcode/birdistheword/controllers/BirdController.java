@@ -69,6 +69,7 @@ public class BirdController {
         Bird bird = birdRepository.findById(birdId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid bird Id: " + birdId));
         model.addAttribute("bird", bird);
+        model.addAttribute("behaviors", Behavior.values());
         return "birds/edit";
     }
 
