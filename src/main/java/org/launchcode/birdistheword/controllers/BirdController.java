@@ -1,24 +1,28 @@
 package org.launchcode.birdistheword.controllers;
 
-import org.launchcode.birdistheword.data.BirdData;
+import org.launchcode.birdistheword.data.BirdRepository;
 import org.launchcode.birdistheword.models.Behavior;
 import org.launchcode.birdistheword.models.Bird;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
 
 @Controller
 @RequestMapping("birds")
 public class BirdController {
 
+    @Autowired
+    private BirdRepository birdRepository;
+
     @GetMapping
     public String displayAllBirds(Model model) {
         model.addAttribute("title", "All Birds");
-        model.addAttribute("birds", BirdData.getAll());
+        model.addAttribute("birds", birdRepository.findAll());
         return "birds/index";
     }
 
@@ -39,14 +43,14 @@ public class BirdController {
             return "birds/log";
         }
 
-        BirdData.add(newBird);
+        birdRepository.save(newBird);
         return "redirect:";
     }
 
     @GetMapping("delete")
     public String displayDeleteBirdForm(Model model) {
         model.addAttribute("title", "Delete Bird");
-        model.addAttribute("birds", BirdData.getAll());
+        model.addAttribute("birds", birdRepository.findAll());
         return "birds/delete";
     }
 
@@ -54,27 +58,27 @@ public class BirdController {
     public String processDeleteEventForm(@RequestParam(required = false) int[] birdIds) {
         if (birdIds != null) {
             for (int id : birdIds) {
-                BirdData.remove(id);
+                birdRepository.deleteById(id);
             }
         }
         return "redirect:";
     }
 
     @GetMapping("edit/{birdId}")
-    public String displayEditBirdForm(Model model, @PathVariable int birdId) {
-        Bird birdToEdit = BirdData.getById(birdId);
-        model.addAttribute("bird", birdToEdit);
-        String title = "Edit Bird " + birdToEdit.getSpecies() + " (id=" + birdToEdit.getId() +")";
-        model.addAttribute("title", title);
+    public String displayEditBirdForm(Model model, @PathVariable("birdId") int birdId) {
+        Bird bird = birdRepository.findById(birdId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid bird Id: " + birdId));
+        model.addAttribute("bird", bird);
         return "birds/edit";
     }
 
-    @PostMapping("edit")
-    public String processEditForm(int birdId, String species, Behavior behavior, String dateSeen) {
-        Bird birdToEdit = BirdData.getById(birdId);
-        birdToEdit.setSpecies(species);
-        birdToEdit.setBehavior(behavior);
-        birdToEdit.setDateSeen(dateSeen);
+    @PostMapping("edit/{birdId}")
+    public String processEditForm(@PathVariable("birdId") int birdId, @Valid Bird bird, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            bird.setId(birdId);
+            return "birds/edit";
+        }
+        birdRepository.save(bird);
         return "redirect:";
     }
 
