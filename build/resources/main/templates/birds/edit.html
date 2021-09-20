@@ -26,11 +26,11 @@
 
     <div class="container">
 
-        <form method="post" th:action="@{/birds/edit}">
+        <form method="post" th:action="@{/birds/edit/{birdId}}" th:object="${bird}">
             <input type="hidden" th:value="${bird.id}" name="birdId" />
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Species</span>
+                    <span class="input-group-text" id="inputGroup-sizing-default" th:if="${#fields.hasErrors('species')}" th:errors="*{species}">Species</span>
                 </div>
                 <input type="text" th:name="species" th:value="${bird.species}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
             </div>
@@ -39,7 +39,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Behavior</span>
                 </div>
-                <select th:field="${bird.behavior}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <select th:id="{bird.behavior}" th:name="behavior" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                     <option th:each="behavior : ${behaviors}"
                             th:value="${behavior}"
                             th:text="${behavior.displayName}"
