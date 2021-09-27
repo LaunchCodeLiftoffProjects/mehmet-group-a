@@ -1,29 +1,20 @@
 package org.launchcode.birdistheword.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.Objects;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Bird {
+public class Bird extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
-
-    @NotBlank(message = "Species is required")
-    @Size(min = 3, max = 100, message = "Species name must be between 3 and 100 characters")
-    private String species;
+    @ManyToOne
+    private Species species;
 
     private Behavior behavior;
 
     private String dateSeen;
 
-    public Bird(String species, Behavior behavior, String dateSeen) {
+    public Bird(Species species, Behavior behavior, String dateSeen) {
         this.species = species;
         this.behavior = behavior;
         this.dateSeen = dateSeen;
@@ -31,19 +22,12 @@ public class Bird {
 
     public Bird() { }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
-    public void setSpecies(String species) {
+    public void setSpecies(Species species) {
         this.species = species;
     }
 
@@ -63,22 +47,8 @@ public class Bird {
         this.dateSeen = dateSeen;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Bird bird = (Bird) o;
-        return id == bird.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     @Override
     public String toString() {
-        return species;
+        return species.getName();
     }
 }

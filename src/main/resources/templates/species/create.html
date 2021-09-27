@@ -11,29 +11,36 @@
     <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Bird Log</a>
+        <a class="navbar-brand" href="/">Add a Species</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="/birds">All Birds</a>
-                <a class="nav-item nav-link" href="/birds/log">Log a Bird</a>
-                <a class="nav-item nav-link" href="/birds/delete">Delete a Bird</a>
-                <a class="nav-item nav-link" href="/species/create">Add a Species</a>
-                <a class="nav-item nav-link" href="/species">All Species</a>
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/">Home</a>
+                    <a class="nav-item nav-link" href="/birds">All Birds</a>
+                    <a class="nav-item nav-link" href="/birds/log">Log a Bird</a>
+                    <a class="nav-item nav-link" href="/birds/delete">Delete a Bird</a>
+                    <a class="nav-item nav-link" href="/species/create">Add a Species<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/species">All Species</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4">Bird is the Word</h1>
-            <p class="lead">On this app, you can add species to your list of birds, log the birds based on species, behavior, and date seen, and delete any logs that have mistakes.</p>
-            <hr class="my-4">
-            <p>Enjoy your ornithological pursuits!</p>
-        </div>
+
+        <form method="post" action="/species/create">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Species Name</span>
+                <input type="text" th:field="${species.name}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <p style="color:red;" th:errors="${species.name}"></p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Species</button>
+        </form>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"

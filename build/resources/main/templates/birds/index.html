@@ -17,9 +17,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/">Home</a>
-                <a class="nav-item nav-link active" href="/birds">All Birds <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="/">Home</a>
+                <a class="nav-item nav-link" href="/birds">All Birds<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="/birds/log">Log a Bird</a>
+                <a class="nav-item nav-link" href="/birds/delete">Delete a Bird</a>
+                <a class="nav-item nav-link" href="/species/create">Add a Species</a>
+                <a class="nav-item nav-link" href="/species">All Species</a>
             </div>
         </div>
     </nav>
@@ -36,12 +39,9 @@
         </thead>
         <tr th:each="bird : ${birds}">
             <td th:text="${bird.id}"></td>
-            <td th:text="${bird.species}"></td>
+            <td th:text="${bird.species.name}"></td>
             <td th:text="${bird.behavior.displayName}"></td>
             <td th:text="${bird.dateSeen}"></td>
-            <td>
-                <a th:href="@{/birds/edit/{id}(id=${bird.id})}">Edit</a>
-            </td>
         </tr>
     </table>
     </div>
