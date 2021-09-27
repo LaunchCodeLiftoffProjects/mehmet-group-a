@@ -1,12 +1,13 @@
 package org.launchcode.birdistheword.controllers;
 
 import org.launchcode.birdistheword.data.BirdRepository;
+import org.launchcode.birdistheword.data.SpeciesRepository;
 import org.launchcode.birdistheword.models.Behavior;
 import org.launchcode.birdistheword.models.Bird;
+import org.launchcode.birdistheword.models.Species;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,9 @@ public class BirdController {
 
     @Autowired
     private BirdRepository birdRepository;
+
+    @Autowired
+    private SpeciesRepository speciesRepository;
 
     @GetMapping
     public String displayAllBirds(Model model) {
@@ -31,6 +35,7 @@ public class BirdController {
         model.addAttribute("title", "Log a Bird");
         model.addAttribute("bird", new Bird());
         model.addAttribute("behaviors", Behavior.values());
+        model.addAttribute("species", speciesRepository.findAll());
         return "birds/log";
     }
 
@@ -39,7 +44,6 @@ public class BirdController {
                                      Errors errors, Model model) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "Log Bird");
-            model.addAttribute("errorMsg", "Bad data!");
             return "birds/log";
         }
 
@@ -64,23 +68,5 @@ public class BirdController {
         return "redirect:";
     }
 
-    @GetMapping("edit/{birdId}")
-    public String displayEditBirdForm(Model model, @PathVariable("birdId") int birdId) {
-        Bird bird = birdRepository.findById(birdId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid bird Id: " + birdId));
-        model.addAttribute("bird", bird);
-        model.addAttribute("behaviors", Behavior.values());
-        return "birds/edit";
-    }
-
-    @PostMapping("edit/{birdId}")
-    public String processEditForm(@PathVariable("birdId") int birdId, @Valid Bird bird, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            bird.setId(birdId);
-            return "birds/edit";
-        }
-        birdRepository.save(bird);
-        return "redirect:";
-    }
 
 }

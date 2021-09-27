@@ -2,7 +2,7 @@
     <html lang="en" xmlns:th="http://www.thymeleaf.org/">
     <head>
         <meta charset="UTF-8"/>
-        <title>Bird Log</title>
+        <title>Add a Species</title>
 
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -17,22 +17,29 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="/">Home</a>
                 <a class="nav-item nav-link" href="/birds">All Birds</a>
                 <a class="nav-item nav-link" href="/birds/log">Log a Bird</a>
                 <a class="nav-item nav-link" href="/birds/delete">Delete a Bird</a>
                 <a class="nav-item nav-link" href="/species/create">Add a Species</a>
-                <a class="nav-item nav-link" href="/species">All Species</a>
+                <a class="nav-item nav-link" href="/species">All Species<span class="sr-only">(current)</span></a>
             </div>
         </div>
     </nav>
-
     <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4">Bird is the Word</h1>
-            <p class="lead">On this app, you can add species to your list of birds, log the birds based on species, behavior, and date seen, and delete any logs that have mistakes.</p>
-            <hr class="my-4">
-            <p>Enjoy your ornithological pursuits!</p>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Species Name</th>
+                </tr>
+                </thead>
+                <tr th:each="oneSpecies : ${species}">
+                    <td th:text="${oneSpecies.id}"></td>
+                    <td th:text="${oneSpecies.name}"></td>
+                </tr>
+            </table>
         </div>
     </div>
 

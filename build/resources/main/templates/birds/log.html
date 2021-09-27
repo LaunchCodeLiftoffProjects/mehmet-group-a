@@ -17,9 +17,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link active" href="/">Home</a>
                 <a class="nav-item nav-link" href="/birds">All Birds</a>
-                <a class="nav-item nav-link active" href="/birds/log">Log a Bird <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/birds/log">Log a Bird<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/birds/delete">Delete a Bird</a>
+                <a class="nav-item nav-link" href="/species/create">Add a Species</a>
+                <a class="nav-item nav-link" href="/species">All Species</a>
             </div>
         </div>
     </nav>
@@ -31,8 +34,13 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default">Species</span>
             </div>
-            <input type="text" th:field="${bird.species}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-            <p style="color:red;" th:errors="${bird.species}"></p>
+            <select th:field="${bird.species}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <option th:each="oneSpecies : ${species}"
+                        th:value="${oneSpecies.id}"
+                        th:text="${oneSpecies.name}"
+                ></option>
+            </select>
+            <p class="error" th:errors="${bird.species}"></p>
         </div>
 
         <div class="input-group mb-3">
@@ -45,6 +53,7 @@
                         th:text="${behavior.displayName}"
                 ></option>
             </select>
+            <p class="error" th:errors="${bird.behavior}"></p>
         </div>
 
         <div class="input-group mb-3">
@@ -52,6 +61,7 @@
                 <span class="input-group-text" id="inputGroup-sizing-default">Date Seen</span>
             </div>
             <input type="text" th:field="${bird.dateSeen}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <p class="error" th:errors="${bird.dateSeen}"></p>
         </div>
 
         <button type="submit" class="btn btn-primary">Log Bird</button>
